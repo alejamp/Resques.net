@@ -1,0 +1,8 @@
+
+src/TestResults/.
+src/TestResults/*
+src/RedisQueue.Bootstrap/bin/*
+src/RedisQueue.Bootstrap/obj/*
+src/RedisQueueExtensions/bin/*
+src/RedisQueueExtensions.Tests/bin/*
+src/RedisQueueExtensions/obj/*
