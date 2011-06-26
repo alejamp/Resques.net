@@ -1,0 +1,11 @@
+In order to run the tests you must have a Redis Server running.
+
+If you already have one, please setup the URLs on app.config.
+
+If not, you may want to use a x64 binary in services/redis.io.2.2.2.x64. 
+	Execute start.bat
+
+What comes next?
+I'm thinking that a "new item" event/notification will be usefull. 
+Using subscriptions for Pub/Sub Redis.io feature, I think it may work.
+Meanwhile this queue needs continues pulling in order to get new items.
