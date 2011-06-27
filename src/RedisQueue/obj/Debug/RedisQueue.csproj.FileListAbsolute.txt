@@ -1,0 +1,15 @@
+C:\Users\ale\GitHubRepos\Redis.Extensions\src\RedisQueue\bin\Debug\RedisQueue.dll
+C:\Users\ale\GitHubRepos\Redis.Extensions\src\RedisQueue\bin\Debug\RedisQueue.pdb
+C:\Users\ale\GitHubRepos\Redis.Extensions\src\RedisQueue\bin\Debug\GTA.Bootstrap.dll
+C:\Users\ale\GitHubRepos\Redis.Extensions\src\RedisQueue\bin\Debug\Gurock.SmartInspect.dll
+C:\Users\ale\GitHubRepos\Redis.Extensions\src\RedisQueue\bin\Debug\RedisQueueExtensions.dll
+C:\Users\ale\GitHubRepos\Redis.Extensions\src\RedisQueue\bin\Debug\ServiceStack.Common.dll
+C:\Users\ale\GitHubRepos\Redis.Extensions\src\RedisQueue\bin\Debug\ServiceStack.Interfaces.dll
+C:\Users\ale\GitHubRepos\Redis.Extensions\src\RedisQueue\bin\Debug\ServiceStack.Redis.dll
+C:\Users\ale\GitHubRepos\Redis.Extensions\src\RedisQueue\bin\Debug\ServiceStack.Text.dll
+C:\Users\ale\GitHubRepos\Redis.Extensions\src\RedisQueue\bin\Debug\StructureMap.dll
+C:\Users\ale\GitHubRepos\Redis.Extensions\src\RedisQueue\bin\Debug\GTA.Bootstrap.pdb
+C:\Users\ale\GitHubRepos\Redis.Extensions\src\RedisQueue\bin\Debug\RedisQueueExtensions.pdb
+C:\Users\ale\GitHubRepos\Redis.Extensions\src\RedisQueue\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\ale\GitHubRepos\Redis.Extensions\src\RedisQueue\obj\Debug\RedisQueue.dll
+C:\Users\ale\GitHubRepos\Redis.Extensions\src\RedisQueue\obj\Debug\RedisQueue.pdb

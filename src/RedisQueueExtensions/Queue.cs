@@ -15,7 +15,7 @@ namespace RedisQueueExtensions
         }
     }
 
-    public class Queue<T>
+    public class Queue<T> : RedisQueueExtensions.IQueue<T>
     {
         private IRedisTypedClient<T> _RedisClient;
         private string _Name;

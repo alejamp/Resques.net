@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisQueueExtensions.Tests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisQueue.Bootstrap", "RedisQueue.Bootstrap\RedisQueue.Bootstrap.csproj", "{FCD1E4E5-AF55-4FC6-AC21-D48856E2C15D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisQueue", "RedisQueue\RedisQueue.csproj", "{90EE4713-D1DA-49E8-BE84-54FBF35D78F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{FCD1E4E5-AF55-4FC6-AC21-D48856E2C15D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCD1E4E5-AF55-4FC6-AC21-D48856E2C15D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCD1E4E5-AF55-4FC6-AC21-D48856E2C15D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90EE4713-D1DA-49E8-BE84-54FBF35D78F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90EE4713-D1DA-49E8-BE84-54FBF35D78F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90EE4713-D1DA-49E8-BE84-54FBF35D78F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90EE4713-D1DA-49E8-BE84-54FBF35D78F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

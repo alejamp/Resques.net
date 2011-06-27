@@ -6,3 +6,4 @@ src/RedisQueue.Bootstrap/obj/*
 src/RedisQueueExtensions/bin/*
 src/RedisQueueExtensions.Tests/bin/*
 src/RedisQueueExtensions/obj/*
+src/RedisQueueExtensions.Tests/obj/*
