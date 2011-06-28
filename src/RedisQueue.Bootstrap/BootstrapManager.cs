@@ -21,6 +21,12 @@ namespace RedisQueue.Bootstrap
             });
         }
 
+        public static void InitLogging()
+        {
+            SiAuto.Si.Enabled = true;
+            SiAuto.Main.Name = "RedisExtensions";
+        }
+
         private static IRedisClientsManager InitRedisClientsManager()
         {
             List<string> rwServers = new List<string>();

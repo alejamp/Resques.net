@@ -6,6 +6,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ServiceStack.Redis;
 using StructureMap;
 using RedisQueue;
+using System.Threading;
+using System.Threading.Tasks;
+using Gurock.SmartInspect;
 
 namespace RedisQueueExtensions.Tests
 {
@@ -21,6 +24,7 @@ namespace RedisQueueExtensions.Tests
         public QueueManagerTests()
         {
             data = new List<string>(new string[] { "str1", "str2", "str3" });
+            RedisQueue.Bootstrap.BootstrapManager.InitLogging();
             RedisQueue.Bootstrap.BootstrapManager.BootRedis();
         }
 
@@ -111,6 +115,48 @@ namespace RedisQueueExtensions.Tests
             }
         }
 
+        [TestMethod]
+        public void Test_Queue_Notifications_Concurrency()
+        {
+            int count = 100;
+            var qn = "q1";
+            var cq1 = new QueueManager<string>(qn);
+            var cq2 = new QueueManager<string>(qn);
+            var incomingMessages1 = new List<string>();
+            var incomingMessages2 = new List<string>();
+            cq1.Flush();
+            cq2.Flush();
+
+            cq1.SubscribeForNewItem(x => {
+                incomingMessages1.Add(x);
+                SiAuto.Main.LogMessage("Incoming item cq1 Value:" + x);
+            });
+            cq2.SubscribeForNewItem(x =>
+            {
+                incomingMessages2.Add(x);
+                SiAuto.Main.LogMessage("Incoming item cq2 Value:" + x);
+            });
+
+            int xx = 0;
+            for (int i = 0; i < count; i++)
+            {
+                Task.Factory.StartNew(() => {
+                    int item = xx++;
+                    SiAuto.Main.LogMessage("New Push:" + item.ToString() + " Thread:" + Thread.CurrentThread.ManagedThreadId);
+                    cq1.Push(item.ToString(), true); 
+                });
+            }
+
+            SiAuto.Main.LogMessage("Waiting...");
+
+            Thread.Sleep(2000);
+            Assert.AreEqual(incomingMessages1.Count + incomingMessages2.Count, count);
+
+            SiAuto.Main.LogMessage("Check if the queues are empty.");
+            var p1 = cq1.Pop();
+            Assert.IsNull(p1);
+            SiAuto.Main.LogMessage("Done!");
+        }
 
         // TODO
         //[TestMethod]
