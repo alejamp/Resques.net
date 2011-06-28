@@ -20,6 +20,6 @@ If not, you may want to use a x64 binary in services/redis.io.2.2.2.x64.
 I strongly suggets you to visit [ServiceStack's C# Redis Client](https://github.com/ServiceStack/ServiceStack.Redis) and take a look to the README file.
 	
 # What comes next?
-I'm thinking that a "new item" event/notification will be usefull. 
-Using subscriptions for Pub/Sub Redis.io feature, I think it may work.
+* I'm thinking that a "new item" event/notification will be useful. Using Pub/Sub Redis.io feature. _Done_
+
 Meanwhile this queue needs continues pulling in order to get new items.
