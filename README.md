@@ -17,7 +17,7 @@ This Extensions are based on [QR](https://github.com/tnm/qr) which helps you cre
     cq1.SubscribeForNewItem(x => {
         Log.Debug("Incoming item cq1 Item:" + x);
     });
-	// Or just pulled it out on demand
+	// Or just pop it out on demand
 	var item = cq1.Pop();
 
 * In order to run the tests you must have a Redis Server running.
