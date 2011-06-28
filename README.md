@@ -9,10 +9,19 @@ This Extensions are based on [QR](https://github.com/tnm/qr) which helps you cre
 
 # How to use it?
 
+	// Create a Queue
+    var cq1 = new QueueManager<string>(qn);
+	// Clear the queue
+    cq1.Flush();
+	// Subscribe for New Items pushed notifications.
+    cq1.SubscribeForNewItem(x => {
+        Log.Debug("Incoming item cq1 Item:" + x);
+    });
+	// Or just pulled it out on demand
+	var item = cq1.Pop();
+
 * In order to run the tests you must have a Redis Server running.
-
 * If you already have one, please setup the URLs in app.config.
-
 * If not, you may want to use a x64 binary in services/redis.io.2.2.2.x64. 
 	Execute start.bat
 
