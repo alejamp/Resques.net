@@ -11,7 +11,9 @@ This Extensions are based on [QR](https://github.com/tnm/qr) which helps you cre
 
 * Queue, Capped Collection and Stack structures.
 * Concurrency Supported
-* 
+* Push Notification "New Item On Queue", when a new item has been 
+added to the queue, QueueManager will notify through Redis.io's "Pub/Sub" to every subscripted client. If the client is not busy, an Async 
+Action will be executed with the Item as param.
 
 # How to use it?
 
