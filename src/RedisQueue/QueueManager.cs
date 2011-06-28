@@ -17,71 +17,14 @@ namespace RedisQueue
     /// QueueManager uses StructureMap IoC in order to instantiate the RedisClient.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class QueueManager<T> : IQueue<T>, IDisposable
+    public class QueueManager<T> : BaseManager<T>, IQueue<T>, IDisposable
     {
 
-        #region Members
-        private const string MSG_NEWITEM = "NewItem";
-
-        private string _Name;
-        private IRedisClient _RedisClient
+        public QueueManager(string name) : base(name)
         {
-            get
-            {
-                return ObjectFactory.GetInstance<IRedisClient>();
-            }
-        }
-        private string PubSubChannelName { get { return "PSChannel:" + _Name;} }
-        private Action<T> OnNewItem;
-        public QueueManager(string name)
-        {
-            _Name = name;
-        }
-        #endregion
-
-        /// <summary>
-        /// Subscribe to new item notification. Action will be execute on each new item poped from the queue.
-        /// If a notification has arrived but no item is returned from Pop(), there will not execute the Action.
-        /// </summary>
-        /// <param name="action">Action to process on each New Item</param>
-        public void SubscribeForNewItem(Action<T> action)
-        {
-            OnNewItem = action;
-            Task.Factory.StartNew(() =>
-                {
-                    using (var redisConsumer = _RedisClient)
-                    using (var subscription = redisConsumer.CreateSubscription())
-                    {
-                        subscription.OnSubscribe = channel =>
-                        {
-                            SiAuto.Main.LogMessage("Subscribed to '{0}'", channel);
-                        };
-                        subscription.OnUnSubscribe = channel =>
-                        {
-                            SiAuto.Main.LogMessage("UnSubscribed from '{0}'", channel);
-                        };
-                        subscription.OnMessage = (channel, msg) =>
-                        {
-                            SiAuto.Main.LogMessage("Received '{0}' from channel '{1}'", msg, channel);
-                            if (msg == MSG_NEWITEM)
-                            {
-                                using (var c = _RedisClient)
-                                using (var client = c.GetTypedClient<T>())
-                                {
-                                    var pop = client.Queue<T>(_Name).Pop();
-                                    if (pop != null)
-                                        OnNewItem(pop);
-                                }
-                            }
-                        };
-
-                        SiAuto.Main.LogMessage("Started Listening On '{0}' Channel", PubSubChannelName);
-                        //Bocking call
-                        subscription.SubscribeToChannels(PubSubChannelName); 
-                    }
-                });
         }
 
+        #region IQueue implementation
         /// <summary>
         /// Clean the queue
         /// </summary>
@@ -90,7 +33,7 @@ namespace RedisQueue
             using (var c = _RedisClient)
             using (var client = c.GetTypedClient<T>())
             {
-                client.Queue<T>(_Name).Flush();
+                client.Queue<T>(Name).Flush();
             }
         }
 
@@ -103,7 +46,7 @@ namespace RedisQueue
             using (var c = _RedisClient)
             using (var client = c.GetTypedClient<T>())
             {
-                return client.Queue<T>(_Name).GetElements();
+                return client.Queue<T>(Name).GetElements();
             }
         }
 
@@ -116,7 +59,7 @@ namespace RedisQueue
             using (var c = _RedisClient)
             using (var client = c.GetTypedClient<T>())
             {
-                return client.Queue<T>(_Name).Pop();
+                return client.Queue<T>(Name).Pop();
             }
         }
 
@@ -128,9 +71,11 @@ namespace RedisQueue
         {
             Push(item, false);
         }
+        #endregion
 
         /// <summary>
-        /// Push an element into the queue. With notification support.
+        /// Push an element into the queue. 
+        /// This method optionaly can push a notification.
         /// </summary>
         /// <param name="item">Element to enqueue</param>
         /// <param name="sendNotification">If true a notification will be sent to every client subscripted to this queue.</param>
@@ -139,7 +84,7 @@ namespace RedisQueue
             using (var c = _RedisClient)
             using (var client = c.GetTypedClient<T>())
             {
-                client.Queue<T>(_Name).Push(item);
+                client.Queue<T>(Name).Push(item);
             }
 
             // Send notifications to subscribers
@@ -147,7 +92,7 @@ namespace RedisQueue
             {
                 Task.Factory.StartNew(() =>
                 {
-                    SiAuto.Main.LogMessage("Publishing New Item Message");
+                    Log.Debug("Publishing New Item Message");
 
                     using (var redisPublisher = _RedisClient)
                     {

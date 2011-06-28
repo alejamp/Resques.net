@@ -129,12 +129,12 @@ namespace RedisQueueExtensions.Tests
 
             cq1.SubscribeForNewItem(x => {
                 incomingMessages1.Add(x);
-                SiAuto.Main.LogMessage("Incoming item cq1 Value:" + x);
+               Log.Debug("Incoming item cq1 Value:" + x);
             });
             cq2.SubscribeForNewItem(x =>
             {
                 incomingMessages2.Add(x);
-                SiAuto.Main.LogMessage("Incoming item cq2 Value:" + x);
+                Log.Debug("Incoming item cq2 Value:" + x);
             });
 
             int xx = 0;
@@ -142,69 +142,20 @@ namespace RedisQueueExtensions.Tests
             {
                 Task.Factory.StartNew(() => {
                     int item = xx++;
-                    SiAuto.Main.LogMessage("New Push:" + item.ToString() + " Thread:" + Thread.CurrentThread.ManagedThreadId);
+                    Log.Debug("New Push:" + item.ToString() + " Thread:" + Thread.CurrentThread.ManagedThreadId);
                     cq1.Push(item.ToString(), true); 
                 });
             }
 
-            SiAuto.Main.LogMessage("Waiting...");
+            Log.Debug("Waiting...");
 
             Thread.Sleep(2000);
             Assert.AreEqual(incomingMessages1.Count + incomingMessages2.Count, count);
 
-            SiAuto.Main.LogMessage("Check if the queues are empty.");
+            Log.Debug("Check if the queues are empty.");
             var p1 = cq1.Pop();
             Assert.IsNull(p1);
-            SiAuto.Main.LogMessage("Done!");
+            Log.Debug("Done!");
         }
-
-        // TODO
-        //[TestMethod]
-        //public void CappedCollection_Enque_Test()
-        //{
-        //    var qn = "cc1";
-        //    using (var client = RedisClient.GetTypedClient<string>())
-        //    {
-        //        var q = client.CappedCollection<string>(qn, 2);
-        //        q.Flush();
-
-        //        data.ForEach(x => q.Push(x));
-        //        var length = q.GetElements().Length;
-        //        Assert.AreEqual(length, 2);
-        //    }
-        //}
-
-        //[TestMethod]
-        //public void CappedCollection_Enque_Pop_Test()
-        //{
-        //    var qn = "cc1";
-        //    using (var client = RedisClient.GetTypedClient<string>())
-        //    {
-        //        var q = client.CappedCollection<string>(qn, 2);
-        //        q.Flush();
-
-        //        data.ForEach(x => q.Push(x));
-        //        var pop1 = q.Pop();
-        //        var pop2 = q.Pop();
-        //        Assert.AreEqual(pop1, data[1]);
-        //        Assert.AreEqual(pop2, data.Last());
-        //    }
-        //}
-
-
-        //[TestMethod]
-        //public void Stack_Enque_Test()
-        //{
-        //    var qn = "cc1";
-        //    using (var client = RedisClient.GetTypedClient<string>())
-        //    {
-        //        var q = client.CappedCollection<string>(qn, 2);
-        //        q.Flush();
-
-        //        data.ForEach(x => q.Push(x));
-        //        var length = q.GetElements().Length;
-        //        Assert.AreEqual(length, 2);
-        //    }
-        //}
     }
 }
