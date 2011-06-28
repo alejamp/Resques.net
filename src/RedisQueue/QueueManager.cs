@@ -76,7 +76,8 @@ namespace RedisQueue
                         };
 
                         SiAuto.Main.LogMessage("Started Listening On '{0}' Channel", PubSubChannelName);
-                        subscription.SubscribeToChannels(PubSubChannelName); //blocking
+                        //Bocking call
+                        subscription.SubscribeToChannels(PubSubChannelName); 
                     }
                 });
         }
@@ -99,7 +100,8 @@ namespace RedisQueue
         /// <returns></returns>
         public T[] GetElements()
         {
-            using (var client = _RedisClient.GetTypedClient<T>())
+            using (var c = _RedisClient)
+            using (var client = c.GetTypedClient<T>())
             {
                 return client.Queue<T>(_Name).GetElements();
             }
