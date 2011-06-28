@@ -13,14 +13,15 @@ namespace RedisQueue
 {
 
     /// <summary>
-    /// FIFO Queue implementation which supports "new item" notification to the clients.
-    /// QueueManager uses StructureMap IoC in order to instantiate the RedisClient.
+    /// LIFO Queue / Stack implementation which supports "new item" notification to the clients.
+    /// StackManager uses StructureMap IoC in order to instantiate the RedisClient.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class QueueManager<T> : BaseManager<T>, IQueue<T>, IDisposable
+    public class StackManager<T> : BaseManager<T>, IQueue<T>, IDisposable
     {
 
-        public QueueManager(string name) : base(name)
+        public StackManager(string name)
+            : base(name)
         {
         }
 
@@ -33,7 +34,7 @@ namespace RedisQueue
             using (var c = _RedisClient)
             using (var client = c.GetTypedClient<T>())
             {
-                client.Queue<T>(Name).Flush();
+                client.Stack<T>(Name).Flush();
             }
         }
 
@@ -46,7 +47,7 @@ namespace RedisQueue
             using (var c = _RedisClient)
             using (var client = c.GetTypedClient<T>())
             {
-                return client.Queue<T>(Name).GetElements();
+                return client.Stack<T>(Name).GetElements();
             }
         }
 
@@ -59,7 +60,7 @@ namespace RedisQueue
             using (var c = _RedisClient)
             using (var client = c.GetTypedClient<T>())
             {
-                return client.Queue<T>(Name).Pop();
+                return client.Stack<T>(Name).Pop();
             }
         }
 
@@ -84,7 +85,7 @@ namespace RedisQueue
             using (var c = _RedisClient)
             using (var client = c.GetTypedClient<T>())
             {
-                client.Queue<T>(Name).Push(item);
+                client.Stack<T>(Name).Push(item);
             }
 
             if (sendNotification) PushNewItemNotification();

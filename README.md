@@ -7,6 +7,12 @@ RedisExtensions adds support for Queue, Capped Collections and Stacks when you u
 
 This Extensions are based on [QR](https://github.com/tnm/qr) which helps you create and work with queue, capped collection (bounded queue), deque, and stack data structures for Redis in Python. 
 
+# Features
+
+* Queue, Capped Collection and Stack structures.
+* Concurrency Supported
+* 
+
 # How to use it?
 
 	// Create a Queue
@@ -29,7 +35,6 @@ This Extensions are based on [QR](https://github.com/tnm/qr) which helps you cre
 I strongly suggets you to visit [ServiceStack's C# Redis Client](https://github.com/ServiceStack/ServiceStack.Redis) and take a look to the README file.
 	
 # What comes next?
-* I'm thinking that a "new item" event/notification will be useful. Using Pub/Sub Redis.io feature. __Done__
-* Add CappedCollectionManager and StackManager.
-* Add notification support for those structures.
+* Add CappedCollectionManager and StackManager. __DONE__
+* Add notification support for those structures. __DONE__
 * Do some benchmark tests.

@@ -80,5 +80,18 @@ namespace RedisQueue
                 }
             });
         }
+
+        public void PushNewItemNotification()
+        {
+            Task.Factory.StartNew(() =>
+            {
+                Log.Debug("Publishing New Item Message");
+
+                using (var redisPublisher = _RedisClient)
+                {
+                    redisPublisher.PublishMessage(PubSubChannelName, MSG_NEWITEM);
+                }
+            });
+        }
     }
 }

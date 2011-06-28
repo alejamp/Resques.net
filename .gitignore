@@ -10,3 +10,4 @@ src/RedisQueueExtensions.Tests/obj/*
 
 src/RedisQueue/bin/*
 src/RedisQueueExtensions.Tests/obj/*
+services/redis.io.2.2.2.x64/dump.rdb
