@@ -9,17 +9,18 @@ This Extensions are based on [QR](https://github.com/tnm/qr) which helps you cre
 
 # How to use it?
 
-In order to run the tests you must have a Redis Server running.
+* In order to run the tests you must have a Redis Server running.
 
-If you already have one, please setup the URLs in app.config.
+* If you already have one, please setup the URLs in app.config.
 
-If not, you may want to use a x64 binary in services/redis.io.2.2.2.x64. 
+* If not, you may want to use a x64 binary in services/redis.io.2.2.2.x64. 
 	Execute start.bat
 
 # More infomation about Redis?
 I strongly suggets you to visit [ServiceStack's C# Redis Client](https://github.com/ServiceStack/ServiceStack.Redis) and take a look to the README file.
 	
 # What comes next?
-* I'm thinking that a "new item" event/notification will be useful. Using Pub/Sub Redis.io feature. _Done_
-
-Meanwhile this queue needs continues pulling in order to get new items.
+* I'm thinking that a "new item" event/notification will be useful. Using Pub/Sub Redis.io feature. __Done__
+* Add CappedCollectionManager and StackManager.
+* Add notification support for those structures.
+* Do some benchmark tests.
