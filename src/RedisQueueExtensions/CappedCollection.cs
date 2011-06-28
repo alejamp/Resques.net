@@ -15,7 +15,7 @@ namespace RedisQueueExtensions
         }
     }
 
-    public class CappedCollection<T>
+    public class CappedCollection<T> : RedisQueueExtensions.IQueue<T>
     {
         private IRedisTypedClient<T> _RedisClient;
         private string _Name;

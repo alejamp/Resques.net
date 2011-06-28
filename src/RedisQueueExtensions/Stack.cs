@@ -16,7 +16,7 @@ namespace RedisQueueExtensions
         }
 
     }
-    public class Stack<T>
+    public class Stack<T> : RedisQueueExtensions.IQueue<T>
     {
         private IRedisTypedClient<T> _RedisClient;
         private string _Name;

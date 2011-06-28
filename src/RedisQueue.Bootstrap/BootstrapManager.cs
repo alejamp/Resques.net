@@ -18,8 +18,13 @@ namespace RedisQueue.Bootstrap
                 // RedisIO
                 x.For<IRedisClientsManager>().Singleton().Use(InitRedisClientsManager);
                 x.For<IRedisClient>().Use(GetRedisClient);
-
             });
+        }
+
+        public static void InitLogging()
+        {
+            SiAuto.Si.Enabled = true;
+            SiAuto.Main.Name = "RedisExtensions";
         }
 
         private static IRedisClientsManager InitRedisClientsManager()
@@ -28,7 +33,7 @@ namespace RedisQueue.Bootstrap
             List<string> roServers = new List<string>();
             rwServers.Add(ConfigurationManager.AppSettings["RedisMasterServerUrl"]);
             roServers.Add(ConfigurationManager.AppSettings["RedisSlave1ServerUrl"]);
-            var redisClientManager = new BasicRedisClientManager(rwServers, roServers);
+            var redisClientManager = new PooledRedisClientManager(rwServers, roServers);
             return redisClientManager;
         }
 

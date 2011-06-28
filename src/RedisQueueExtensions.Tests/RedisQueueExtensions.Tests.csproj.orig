@@ -64,9 +64,13 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExtensionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueueManagerTests.cs" />
+<<<<<<< HEAD
+    <Compile Include="ExtensionTests.cs" />
+=======
+    <Compile Include="QueueTests.cs" />
+>>>>>>> events
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RedisQueue.Bootstrap\RedisQueue.Bootstrap.csproj">
