@@ -17,25 +17,24 @@ Action will be executed with the Item as param.
 
 # How to use it?
 
-	// Create a Queue
+  // Create a Queue
     var cq1 = new QueueManager<string>(qn);
-	// Clear the queue
+  // Clear the queue
     cq1.Flush();
-	// Subscribe for New Items pushed notifications.
+  // Subscribe for New Items pushed notifications.
     cq1.SubscribeForNewItem(x => {
         Log.Debug("Incoming item cq1 Item:" + x);
     });
-	// Or just pop it out on demand
-	var item = cq1.Pop();
+  // Or just pop it out on demand
+  var item = cq1.Pop();
 
 * In order to run the tests you must have a Redis Server running.
 * If you already have one, please setup the URLs in app.config.
-* If not, you may want to use a x64 binary in services/redis.io.2.2.2.x64. 
-	Execute start.bat
+* If not, you may run services/start.bat to run an instance of redis
 
 # More infomation about Redis?
-I strongly suggets you to visit [ServiceStack's C# Redis Client](https://github.com/ServiceStack/ServiceStack.Redis) and take a look to the README file.
-	
+I strongly suggest you to visit [ServiceStack's C# Redis Client](https://github.com/ServiceStack/ServiceStack.Redis) and take a look to the README file.
+  
 # What comes next?
 * Add CappedCollectionManager and StackManager. __DONE__
 * Add notification support for those structures. __DONE__
