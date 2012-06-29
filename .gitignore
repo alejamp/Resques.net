@@ -1,13 +1,30 @@
 
-src/TestResults/.
-src/TestResults/*
-src/RedisQueue.Bootstrap/bin/*
-src/RedisQueue.Bootstrap/obj/*
-src/RedisQueueExtensions/bin/*
-src/RedisQueueExtensions.Tests/bin/*
-src/RedisQueueExtensions/obj/*
-src/RedisQueueExtensions.Tests/obj/*
-
-src/RedisQueue/bin/*
-src/RedisQueueExtensions.Tests/obj/*
-services/redis.io.2.2.2.x64/dump.rdb
+#ignore thumbnails created by windows
+Thumbs.db
+#Ignore files build by Visual Studio
+*.obj
+*.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+[Bb]in
+[Dd]ebug*/
+*.lib
+*.sbr
+obj/
+[Rr]elease*/
+_ReSharper*/
+[Tt]est[Rr]esult*
+*dump.rdb
